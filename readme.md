@@ -70,3 +70,5 @@ This is what the output of running the application must look like: node-app-outp
 
 EXERCISE 9: Bash Script - Node App with Service user
 You've been running the application with your user. But we need to adjust that and create own service user: myapp for the application to run. So extend the script to create the user and then run the application with the service user. 
+
+Reference/Support [Link1](https://www.techworld-with-nana.com/devops-bootcamp) [Link2](https://hpc.ua.edu/wp-content/uploads/2022/02/Linux_bash_cheat_sheet.pdf)
