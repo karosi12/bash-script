@@ -10,6 +10,8 @@ then
   brew install wget 
   echo "use homebrew manager to install wget"
   export PATH="$PATH:/usr/local/bin/wget"
+  # relaod the file 
+  source /etc/zshrc
   echo "wget version $(wget --version) installed"
 else
   echo "wget is installed"
