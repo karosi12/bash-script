@@ -1,13 +1,14 @@
 #!/bin/bash
 
 apt update
-apt install -y wget 
+apt install -y wget curl net-tools
 
 wget_version=$(wget --version 2>&1 > /dev/null | grep "GNU Wget")
 
 if [ "$wget_version" == "" ]
 then
-  brew install wget 
+  # using Homebrew manager
+  brew install wget curl net-tools
   echo "use homebrew manager to install wget"
   export PATH="$PATH:/usr/local/bin/wget"
   # relaod the file 
@@ -37,7 +38,6 @@ echo "Nodejs version $node_version was installed"
 npm_version=$(npm --version)
 echo "NPM version $npm_version was installed"
 
-curl net-tools 
 
 wget https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
 
@@ -49,6 +49,23 @@ export APP_ENV=dev
 export DB_USER=myuser
 export DB_PWD=mysecret
 
-npm install && node server.js
+npm install 
 
-netstat -ltnp | grep :3000
+# start the nodejs application in the background
+node server.js &
+
+# display that nodejs process is running
+ps aux | grep node | grep -v grep
+
+# display that nodejs is running on port 3000
+os="`uname`"
+if [ $os == "Darwin" ];
+  then
+  lsof -iTCP:3000 -sTCP:LISTEN -P -n
+else
+  netstat -ltnp | grep :3000
+fi
+
+# To kill a running port
+
+# kill -9 $(lsof -t -i:3000 -sTCP:LISTEN)
